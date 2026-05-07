@@ -570,7 +570,7 @@
       <h4>Contact Us</h4>
       <ul>
         <li>📍 14-165, Huzurabad, Karimnagar – 505468</li>
-        <li style="margin-top:8px;">📞 <a href="tel:+91XXXXXXXXXX" style="color:rgba(255,253,247,0.6);">+91 XXXXX XXXXX</a></li>
+        <li style="margin-top:8px;">📞 <a href="tel:+919502592824" style="color:rgba(255,253,247,0.6);">+91 95025 92824</a></li>
         <li style="margin-top:8px;">🕐 7 AM – 8 PM, All Days</li>
       </ul>
     </div>
@@ -582,7 +582,7 @@
 </footer>
 
 <!-- WHATSAPP FLOAT -->
-<a class="wa-float" href="https://wa.me/91XXXXXXXXXX?text=Hi%20Egg%20Box!%20I%20want%20to%20place%20an%20order." target="_blank">
+<a class="wa-float" href="https://wa.me/919502592824?text=Hi%20Egg%20Box!%20I%20want%20to%20place%20an%20order." target="_blank">
   <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M16 0C7.163 0 0 7.163 0 16c0 2.822.736 5.467 2.024 7.764L0 32l8.48-2.024A15.934 15.934 0 0016 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm0 29.333a13.29 13.29 0 01-6.773-1.845l-.486-.288-5.032 1.2 1.2-4.9-.317-.502A13.288 13.288 0 012.667 16C2.667 8.636 8.636 2.667 16 2.667S29.333 8.636 29.333 16 23.364 29.333 16 29.333zm7.301-9.88c-.4-.2-2.364-1.167-2.73-1.3-.367-.133-.634-.2-.9.2-.267.4-1.034 1.3-1.267 1.567-.233.267-.467.3-.867.1-.4-.2-1.69-.622-3.22-1.984-1.19-1.06-1.994-2.368-2.228-2.768-.234-.4-.025-.616.175-.815.18-.18.4-.467.6-.7.2-.233.267-.4.4-.667.133-.267.067-.5-.033-.7-.1-.2-.9-2.167-1.234-2.967-.323-.78-.652-.674-.9-.686-.233-.012-.5-.015-.767-.015-.267 0-.7.1-1.067.5-.367.4-1.4 1.367-1.4 3.333 0 1.967 1.433 3.867 1.633 4.133.2.267 2.82 4.3 6.833 6.033.956.412 1.7.658 2.282.843.958.305 1.832.262 2.52.159.769-.115 2.364-.967 2.698-1.9.333-.933.333-1.733.233-1.9-.1-.167-.367-.267-.767-.467z"/></svg>
 </a>
 
@@ -667,10 +667,28 @@
     if (!addr) { showToast('⚠️ Please enter your delivery address.'); return; }
     const p = prices[selectedType], total = p * qty * 30;
     const typeName = selectedType === 'desi' ? 'Desi Eggs' : 'White Eggs';
-    const msg = `🥚 *New Order – Egg Box*%0A%0A👤 *Name:* ${encodeURIComponent(name)}%0A📞 *Phone:* ${phone}%0A📍 *Address:* ${encodeURIComponent(addr)}%0A%0A📦 *Egg Type:* ${typeName}%0A🗂 *Trays:* ${qty} (${qty*30} eggs)%0A💰 *Total:* ₹${total.toFixed(0)}%0A%0A✅ Please confirm & share UPI details.`;
-    window.open(`https://wa.me/91XXXXXXXXXX?text=${msg}`, '_blank');
-    document.getElementById('success-msg').textContent = `Thank you, ${name}! Your order of ${qty} tray(s) of ${typeName} (₹${total.toFixed(0)}) was sent via WhatsApp. We'll confirm shortly!`;
+
+    // Build plain text message then encode fully
+    const plainMsg = 
+      '🥚 New Order – Egg Box\n\n' +
+      '👤 Name: ' + name + '\n' +
+      '📞 Phone: ' + phone + '\n' +
+      '📍 Address: ' + addr + '\n\n' +
+      '📦 Egg Type: ' + typeName + '\n' +
+      '🗂 Trays: ' + qty + ' (' + (qty*30) + ' eggs)\n' +
+      '💰 Total: Rs.' + total.toFixed(0) + '\n\n' +
+      'Please confirm and share UPI details.';
+
+    const waURL = 'https://api.whatsapp.com/send?phone=919502592824&text=' + encodeURIComponent(plainMsg);
+
+    // Show success popup first
+    document.getElementById('success-msg').textContent = 'Thank you, ' + name + '! Your order of ' + qty + ' tray(s) of ' + typeName + ' (Rs.' + total.toFixed(0) + ') is ready. Tap OK to send it to us on WhatsApp!';
     document.getElementById('success-overlay').classList.add('open');
+
+    // Open WhatsApp after short delay so popup shows first
+    setTimeout(function() {
+      window.location.href = waURL;
+    }, 1500);
   }
   function showToast(msg) {
     const t = document.getElementById('toast');
