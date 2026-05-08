@@ -352,6 +352,164 @@
     .footer-grid { grid-template-columns: 1fr; }
     .admin-grid { grid-template-columns: 1fr; }
   }
+
+  /* ── ADMIN DASHBOARD ── */
+  .admin-dash-overlay {
+    display: none; position: fixed; inset: 0; z-index: 10000;
+    background: #0f0a05; overflow-y: auto;
+  }
+  .admin-dash-overlay.open { display: block; }
+
+  .admin-dash {
+    max-width: 900px; margin: 0 auto; padding: 24px 16px 60px;
+  }
+
+  .admin-dash-header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 28px; flex-wrap: wrap; gap: 12px;
+  }
+  .admin-dash-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem; font-weight: 900; color: var(--gold);
+  }
+  .admin-dash-title span { font-size: 1rem; color: rgba(255,253,247,0.4); font-family: 'DM Sans',sans-serif; font-weight: 400; margin-left: 8px; }
+  .dash-close-btn {
+    background: rgba(255,253,247,0.08); color: rgba(255,253,247,0.7);
+    border: 1px solid rgba(255,253,247,0.15); border-radius: 8px;
+    padding: 8px 18px; font-size: 0.85rem; cursor: pointer; transition: all 0.2s;
+  }
+  .dash-close-btn:hover { background: rgba(255,253,247,0.15); }
+
+  /* Stats Row */
+  .dash-stats {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(140px,1fr));
+    gap: 14px; margin-bottom: 28px;
+  }
+  .dash-stat {
+    background: rgba(255,253,247,0.05); border: 1px solid rgba(245,200,66,0.18);
+    border-radius: 14px; padding: 18px 16px; text-align: center;
+  }
+  .dash-stat .ds-num {
+    font-family: 'Playfair Display',serif; font-size: 1.8rem;
+    font-weight: 700; color: var(--gold); display: block;
+  }
+  .dash-stat .ds-lbl { font-size: 0.72rem; color: rgba(255,253,247,0.45); text-transform: uppercase; letter-spacing: 0.08em; }
+
+  /* Filter tabs */
+  .dash-filters {
+    display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap;
+  }
+  .dash-filter-btn {
+    padding: 7px 18px; border-radius: 100px; font-size: 0.8rem; font-weight: 600;
+    border: 1.5px solid rgba(255,253,247,0.15); background: transparent;
+    color: rgba(255,253,247,0.55); cursor: pointer; transition: all 0.2s;
+  }
+  .dash-filter-btn.active, .dash-filter-btn:hover {
+    border-color: var(--amber); color: var(--gold); background: rgba(212,120,10,0.12);
+  }
+
+  /* Refresh btn */
+  .dash-refresh {
+    margin-left: auto; padding: 7px 16px; border-radius: 8px;
+    background: rgba(212,120,10,0.15); border: 1px solid rgba(212,120,10,0.35);
+    color: var(--amber); font-size: 0.8rem; font-weight: 600; cursor: pointer;
+    transition: all 0.2s;
+  }
+  .dash-refresh:hover { background: rgba(212,120,10,0.25); }
+
+  /* Orders list */
+  .orders-list { display: flex; flex-direction: column; gap: 14px; }
+
+  .order-card {
+    background: rgba(255,253,247,0.05); border: 1px solid rgba(255,253,247,0.1);
+    border-radius: 16px; padding: 20px; transition: all 0.2s;
+    border-left: 4px solid rgba(255,253,247,0.1);
+  }
+  .order-card.status-pending { border-left-color: #F5A623; }
+  .order-card.status-confirmed { border-left-color: #4CAF50; }
+  .order-card.status-cancelled { border-left-color: #f44336; }
+
+  .order-card-top {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    gap: 12px; margin-bottom: 14px; flex-wrap: wrap;
+  }
+  .order-id-time .oid {
+    font-family: 'Playfair Display',serif; font-size: 0.95rem;
+    color: var(--gold); font-weight: 700;
+  }
+  .order-id-time .otime { font-size: 0.75rem; color: rgba(255,253,247,0.4); margin-top: 2px; }
+
+  .status-badge {
+    padding: 4px 12px; border-radius: 100px; font-size: 0.72rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.06em;
+  }
+  .badge-pending { background: rgba(245,166,35,0.2); color: #F5A623; }
+  .badge-confirmed { background: rgba(76,175,80,0.2); color: #4CAF50; }
+  .badge-cancelled { background: rgba(244,67,54,0.2); color: #f44336; }
+
+  .order-card-details {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px;
+  }
+  .odet { }
+  .odet .olbl { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.07em; color: rgba(255,253,247,0.35); margin-bottom: 2px; }
+  .odet .oval { font-size: 0.88rem; color: rgba(255,253,247,0.85); font-weight: 500; }
+  .odet .oval.big { font-family: 'Playfair Display',serif; font-size: 1.1rem; color: var(--gold); font-weight: 700; }
+
+  .order-card-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+  .oa-btn {
+    padding: 8px 16px; border-radius: 8px; font-size: 0.8rem; font-weight: 600;
+    border: none; cursor: pointer; transition: all 0.2s; flex: 1; min-width: 80px;
+  }
+  .oa-confirm { background: rgba(76,175,80,0.15); color: #4CAF50; border: 1px solid rgba(76,175,80,0.3); }
+  .oa-confirm:hover { background: rgba(76,175,80,0.3); }
+  .oa-cancel { background: rgba(244,67,54,0.12); color: #f44336; border: 1px solid rgba(244,67,54,0.25); }
+  .oa-cancel:hover { background: rgba(244,67,54,0.25); }
+  .oa-whatsapp { background: rgba(37,211,102,0.12); color: #25D366; border: 1px solid rgba(37,211,102,0.25); }
+  .oa-whatsapp:hover { background: rgba(37,211,102,0.25); }
+  .oa-delete { background: rgba(255,255,255,0.05); color: rgba(255,253,247,0.4); border: 1px solid rgba(255,255,255,0.1); }
+  .oa-delete:hover { background: rgba(244,67,54,0.15); color: #f44336; border-color: rgba(244,67,54,0.3); }
+
+  /* Empty & loading states */
+  .dash-empty {
+    text-align: center; padding: 60px 20px; color: rgba(255,253,247,0.3);
+  }
+  .dash-empty .de-icon { font-size: 3rem; margin-bottom: 12px; }
+  .dash-empty p { font-size: 0.9rem; }
+  .dash-loading { text-align: center; padding: 40px; color: rgba(255,253,247,0.4); font-size: 0.9rem; }
+
+  /* Setup banner */
+  .setup-banner {
+    background: rgba(212,120,10,0.12); border: 1px solid rgba(212,120,10,0.3);
+    border-radius: 12px; padding: 16px 20px; margin-bottom: 24px;
+    display: flex; align-items: flex-start; gap: 12px;
+  }
+  .setup-banner .sb-icon { font-size: 1.4rem; flex-shrink: 0; }
+  .setup-banner .sb-text { font-size: 0.82rem; color: rgba(255,253,247,0.65); line-height: 1.6; }
+  .setup-banner .sb-text strong { color: var(--gold); }
+
+  /* Admin login */
+  .admin-login-box {
+    max-width: 360px; margin: 15vh auto 0; background: rgba(255,253,247,0.05);
+    border: 1px solid rgba(245,200,66,0.2); border-radius: 20px; padding: 40px 32px;
+    text-align: center;
+  }
+  .admin-login-box h2 { font-family:'Playfair Display',serif; font-size:1.6rem; color:var(--gold); margin-bottom: 8px; }
+  .admin-login-box p { font-size: 0.82rem; color: rgba(255,253,247,0.45); margin-bottom: 28px; }
+  .admin-login-box input {
+    width: 100%; padding: 13px 16px; border-radius: 10px;
+    border: 1.5px solid rgba(245,200,66,0.3); background: rgba(255,253,247,0.06);
+    color: var(--white); font-size: 1rem; font-family:'DM Sans',sans-serif;
+    outline: none; margin-bottom: 16px; text-align: center; letter-spacing: 0.15em;
+  }
+  .admin-login-box input:focus { border-color: var(--amber); }
+  .admin-login-submit {
+    width: 100%; padding: 13px; background: var(--amber); color: white;
+    border: none; border-radius: 10px; font-size: 0.95rem; font-weight: 700;
+    cursor: pointer; transition: background 0.2s;
+  }
+  .admin-login-submit:hover { background: #B8660A; }
+  .login-err { color: #f44336; font-size: 0.8rem; margin-top: 8px; display: none; }
+
 </style>
 </head>
 <body>
@@ -658,37 +816,41 @@
     document.getElementById('sum-peregg').textContent = '₹' + p.toFixed(2);
     document.getElementById('sum-total').textContent = '₹' + total.toFixed(0);
   }
+  // GOOGLE SHEETS URL - replace after setup
+  const SHEET_URL = 'https://script.google.com/macros/s/AKfycbzN1v1gjmYldLKTz92WyriXkurdArG97NtNYLF2GRKmtqxYW1TXrhfxwACDzU_kmMfa/exec';
+
   function submitOrder() {
     const name = document.getElementById('cust-name').value.trim();
     const phone = document.getElementById('cust-phone').value.trim();
     const addr = document.getElementById('cust-addr').value.trim();
-    if (!name) { showToast('⚠️ Please enter your name.'); return; }
-    if (!/^\d{10}$/.test(phone)) { showToast('⚠️ Enter a valid 10-digit number.'); return; }
-    if (!addr) { showToast('⚠️ Please enter your delivery address.'); return; }
+    if (!name) { showToast('Please enter your name.'); return; }
+    if (!/^\d{10}$/.test(phone)) { showToast('Enter a valid 10-digit number.'); return; }
+    if (!addr) { showToast('Please enter your delivery address.'); return; }
     const p = prices[selectedType], total = p * qty * 30;
     const typeName = selectedType === 'desi' ? 'Desi Eggs' : 'White Eggs';
 
-    // Build plain text message then encode fully
-    const plainMsg = 
-      '🥚 New Order – Egg Box\n\n' +
-      '👤 Name: ' + name + '\n' +
-      '📞 Phone: ' + phone + '\n' +
-      '📍 Address: ' + addr + '\n\n' +
-      '📦 Egg Type: ' + typeName + '\n' +
-      '🗂 Trays: ' + qty + ' (' + (qty*30) + ' eggs)\n' +
-      '💰 Total: Rs.' + total.toFixed(0) + '\n\n' +
+    // Save order to Google Sheets
+    if (SHEET_URL !== 'https://script.google.com/macros/s/AKfycbzN1v1gjmYldLKTz92WyriXkurdArG97NtNYLF2GRKmtqxYW1TXrhfxwACDzU_kmMfa/exec') {
+      fetch(SHEET_URL, {
+        method: 'POST',
+        body: JSON.stringify({ name, phone, address: addr, eggType: typeName, trays: qty, totalEggs: qty*30, totalAmount: total.toFixed(0) })
+      }).catch(()=>{});
+    }
+
+    const plainMsg =
+      'New Order Egg Box\n\n' +
+      'Name: ' + name + '\n' +
+      'Phone: ' + phone + '\n' +
+      'Address: ' + addr + '\n\n' +
+      'Egg Type: ' + typeName + '\n' +
+      'Trays: ' + qty + ' (' + (qty*30) + ' eggs)\n' +
+      'Total: Rs.' + total.toFixed(0) + '\n\n' +
       'Please confirm and share UPI details.';
 
     const waURL = 'https://api.whatsapp.com/send?phone=919502592824&text=' + encodeURIComponent(plainMsg);
-
-    // Show success popup first
-    document.getElementById('success-msg').textContent = 'Thank you, ' + name + '! Your order of ' + qty + ' tray(s) of ' + typeName + ' (Rs.' + total.toFixed(0) + ') is ready. Tap OK to send it to us on WhatsApp!';
+    document.getElementById('success-msg').textContent = 'Thank you ' + name + '! WhatsApp is opening now - please tap SEND in WhatsApp to complete your order!';
     document.getElementById('success-overlay').classList.add('open');
-
-    // Open WhatsApp after short delay so popup shows first
-    setTimeout(function() {
-      window.location.href = waURL;
-    }, 1500);
+    setTimeout(function(){ window.location.href = waURL; }, 1500);
   }
   function showToast(msg) {
     const t = document.getElementById('toast');
@@ -701,7 +863,7 @@
     e.preventDefault(); logoClicks++;
     clearTimeout(logoTimer);
     logoTimer = setTimeout(() => logoClicks = 0, 2000);
-    if (logoClicks >= 5) { logoClicks = 0; openAdmin(); }
+    if (logoClicks >= 5) { logoClicks = 0; openAdminDash(); }
   });
   function openAdmin() {
     document.getElementById('admin-desi').value = prices.desi;
@@ -721,6 +883,214 @@
   document.getElementById('admin-overlay').addEventListener('click', e => { if (e.target === document.getElementById('admin-overlay')) document.getElementById('admin-overlay').classList.remove('open'); });
   document.getElementById('success-overlay').addEventListener('click', e => { if (e.target === document.getElementById('success-overlay')) document.getElementById('success-overlay').classList.remove('open'); });
   loadPrices(); setDate();
+
+  // ── ADMIN DASHBOARD ──
+  const ADMIN_PASSWORD = 'eggbox2024'; // Change this to your own password!
+  let allOrders = [];
+  let currentFilter = 'all';
+
+  function openAdminDash() {
+    document.getElementById('adminDash').classList.add('open');
+    document.getElementById('adminLoginScreen').style.display = 'block';
+    document.getElementById('adminDashScreen').style.display = 'none';
+    document.getElementById('adminPwdInput').value = '';
+    document.getElementById('loginErr').style.display = 'none';
+  }
+
+  function closeAdminDash() {
+    document.getElementById('adminDash').classList.remove('open');
+  }
+
+  function adminLogin() {
+    const pwd = document.getElementById('adminPwdInput').value;
+    if (pwd === ADMIN_PASSWORD) {
+      document.getElementById('adminLoginScreen').style.display = 'none';
+      document.getElementById('adminDashScreen').style.display = 'block';
+      loadOrders();
+    } else {
+      document.getElementById('loginErr').style.display = 'block';
+      document.getElementById('adminPwdInput').value = '';
+    }
+  }
+
+  function loadOrders() {
+    const list = document.getElementById('ordersList');
+    list.innerHTML = '<div class="dash-loading">🔄 Loading orders...</div>';
+
+    // Check if Google Sheets is configured
+    if (SHEET_URL === 'https://script.google.com/macros/s/AKfycbzN1v1gjmYldLKTz92WyriXkurdArG97NtNYLF2GRKmtqxYW1TXrhfxwACDzU_kmMfa/exec') {
+      document.getElementById('setupBanner').style.display = 'flex';
+      list.innerHTML = '<div class="dash-empty"><div class="de-icon">📋</div><p>No orders yet.<br>Connect Google Sheets to see orders here.<br><br>Orders are still coming to your WhatsApp!</p></div>';
+      updateStats([]);
+      return;
+    }
+
+    fetch(SHEET_URL + '?action=getOrders')
+      .then(r => r.json())
+      .then(orders => {
+        allOrders = orders;
+        updateStats(orders);
+        renderOrders(orders, currentFilter);
+        document.getElementById('dash-subtitle').textContent = '(' + orders.length + ' total)';
+      })
+      .catch(() => {
+        list.innerHTML = '<div class="dash-empty"><div class="de-icon">⚠️</div><p>Could not load orders. Check your internet connection and try refreshing.</p></div>';
+      });
+  }
+
+  function updateStats(orders) {
+    const today = new Date().toLocaleDateString('en-IN');
+    const todayOrders = orders.filter(o => o.time && o.time.includes(today.split('/')[0]));
+    const pending = orders.filter(o => o.status === 'Pending').length;
+    const confirmed = orders.filter(o => o.status === 'Confirmed').length;
+    const revenue = orders
+      .filter(o => o.status === 'Confirmed')
+      .reduce((sum, o) => sum + parseInt((o.totalAmount || '0').replace(/[^0-9]/g,'')), 0);
+
+    document.getElementById('stat-total').textContent = orders.length;
+    document.getElementById('stat-pending').textContent = pending;
+    document.getElementById('stat-confirmed').textContent = confirmed;
+    document.getElementById('stat-revenue').textContent = '₹' + revenue;
+  }
+
+  function filterOrders(status, btn) {
+    currentFilter = status;
+    document.querySelectorAll('.dash-filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderOrders(allOrders, status);
+  }
+
+  function renderOrders(orders, filter) {
+    const list = document.getElementById('ordersList');
+    const filtered = filter === 'all' ? orders : orders.filter(o => o.status === filter);
+
+    if (filtered.length === 0) {
+      list.innerHTML = '<div class="dash-empty"><div class="de-icon">📭</div><p>No ' + (filter === 'all' ? '' : filter.toLowerCase() + ' ') + 'orders found.</p></div>';
+      return;
+    }
+
+    list.innerHTML = filtered.map(order => {
+      const statusClass = 'status-' + (order.status || 'pending').toLowerCase();
+      const badgeClass = 'badge-' + (order.status || 'pending').toLowerCase();
+      const actionBtns = order.status === 'Pending'
+        ? '<button class="oa-btn oa-confirm" onclick="updateStatus(' + order.row + ', 'Confirmed')">✅ Confirm</button>' +
+          '<button class="oa-btn oa-cancel" onclick="updateStatus(' + order.row + ', 'Cancelled')">❌ Cancel</button>'
+        : '<button class="oa-btn oa-confirm" onclick="updateStatus(' + order.row + ', 'Pending')">↩ Reset</button>';
+
+      return '<div class="order-card ' + statusClass + '" id="card-' + order.row + '">' +
+        '<div class="order-card-top">' +
+          '<div class="order-id-time"><div class="oid">' + (order.orderId || 'Order') + '</div><div class="otime">' + (order.time || '') + '</div></div>' +
+          '<span class="status-badge ' + badgeClass + '">' + (order.status || 'Pending') + '</span>' +
+        '</div>' +
+        '<div class="order-card-details">' +
+          '<div class="odet"><div class="olbl">Customer</div><div class="oval">' + (order.name || '-') + '</div></div>' +
+          '<div class="odet"><div class="olbl">Phone</div><div class="oval">' + (order.phone || '-') + '</div></div>' +
+          '<div class="odet"><div class="olbl">Egg Type</div><div class="oval">' + (order.eggType || '-') + '</div></div>' +
+          '<div class="odet"><div class="olbl">Trays</div><div class="oval">' + (order.trays || '-') + ' tray (' + (order.totalEggs || '-') + ' eggs)</div></div>' +
+          '<div class="odet" style="grid-column:span 2"><div class="olbl">Address</div><div class="oval">' + (order.address || '-') + '</div></div>' +
+          '<div class="odet"><div class="olbl">Total Amount</div><div class="oval big">' + (order.totalAmount || '-') + '</div></div>' +
+        '</div>' +
+        '<div class="order-card-actions">' +
+          actionBtns +
+          '<button class="oa-btn oa-whatsapp" onclick="callCustomer('' + (order.phone || '') + '', '' + (order.name || '') + '')">💬 WhatsApp</button>' +
+          '<button class="oa-btn oa-delete" onclick="deleteOrder(' + order.row + ', '' + (order.orderId || '') + '')">🗑 Delete</button>' +
+        '</div>' +
+      '</div>';
+    }).join('');
+  }
+
+  function updateStatus(row, status) {
+    fetch(SHEET_URL + '?action=updateStatus&row=' + row + '&status=' + status)
+      .then(r => r.json())
+      .then(() => { loadOrders(); showToast('Order marked as ' + status + '!'); })
+      .catch(() => showToast('Failed to update. Try again.'));
+  }
+
+  function deleteOrder(row, orderId) {
+    if (!confirm('Delete order ' + orderId + '? This cannot be undone.')) return;
+    fetch(SHEET_URL + '?action=deleteOrder&row=' + row)
+      .then(r => r.json())
+      .then(() => { loadOrders(); showToast('Order deleted!'); })
+      .catch(() => showToast('Failed to delete. Try again.'));
+  }
+
+  function callCustomer(phone, name) {
+    const msg = 'Hi ' + name + '! Your Egg Box order has been confirmed. We will deliver soon. Thank you!';
+    window.open('https://api.whatsapp.com/send?phone=91' + phone + '&text=' + encodeURIComponent(msg), '_blank');
+  }
+
 </script>
+
+<!-- ── ADMIN DASHBOARD OVERLAY ── -->
+<div class="admin-dash-overlay" id="adminDash">
+  <!-- Login Screen -->
+  <div id="adminLoginScreen" class="admin-dash">
+    <div class="admin-login-box">
+      <div style="font-size:2.5rem;margin-bottom:12px;">🔐</div>
+      <h2>Admin Access</h2>
+      <p>Enter your password to view orders</p>
+      <input type="password" id="adminPwdInput" placeholder="Enter password" onkeydown="if(event.key==='Enter')adminLogin()" />
+      <button class="admin-login-submit" onclick="adminLogin()">Login →</button>
+      <div class="login-err" id="loginErr">❌ Wrong password. Try again.</div>
+    </div>
+  </div>
+
+  <!-- Dashboard Screen -->
+  <div id="adminDashScreen" class="admin-dash" style="display:none;">
+    <div class="admin-dash-header">
+      <div>
+        <div class="admin-dash-title">📦 Orders <span id="dash-subtitle">Loading...</span></div>
+      </div>
+      <div style="display:flex;gap:10px;align-items:center;">
+        <button class="dash-refresh" onclick="loadOrders()">🔄 Refresh</button>
+        <button class="dash-close-btn" onclick="closeAdminDash()">✕ Close</button>
+      </div>
+    </div>
+
+    <!-- Setup banner (shown when URL not configured) -->
+    <div class="setup-banner" id="setupBanner" style="display:none;">
+      <span class="sb-icon">⚙️</span>
+      <div class="sb-text">
+        <strong>Setup Required:</strong> Connect Google Sheets to start saving orders automatically.
+        Follow the setup guide to get your Apps Script URL and update the website file.
+        For now, orders still go to your WhatsApp!
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="dash-stats">
+      <div class="dash-stat">
+        <span class="ds-num" id="stat-total">0</span>
+        <span class="ds-lbl">Total Orders</span>
+      </div>
+      <div class="dash-stat">
+        <span class="ds-num" id="stat-pending">0</span>
+        <span class="ds-lbl">Pending</span>
+      </div>
+      <div class="dash-stat">
+        <span class="ds-num" id="stat-confirmed">0</span>
+        <span class="ds-lbl">Confirmed</span>
+      </div>
+      <div class="dash-stat">
+        <span class="ds-num" id="stat-revenue">₹0</span>
+        <span class="ds-lbl">Today's Revenue</span>
+      </div>
+    </div>
+
+    <!-- Filters -->
+    <div class="dash-filters">
+      <button class="dash-filter-btn active" onclick="filterOrders('all', this)">All</button>
+      <button class="dash-filter-btn" onclick="filterOrders('Pending', this)">⏳ Pending</button>
+      <button class="dash-filter-btn" onclick="filterOrders('Confirmed', this)">✅ Confirmed</button>
+      <button class="dash-filter-btn" onclick="filterOrders('Cancelled', this)">❌ Cancelled</button>
+    </div>
+
+    <!-- Orders List -->
+    <div class="orders-list" id="ordersList">
+      <div class="dash-loading">Loading orders...</div>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
